@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                         <tr v-for="(employee, index) in employees" :key="employee.id">
-                            <th scope="row">{{ index + 1 }}</th>
+                            <th scope="row">{{ employee.id }}</th>
                             <td>{{ employee.name }}</td>
                             <td>{{ employee.department }}</td>
                             <td>{{ employee.section }}</td>
@@ -97,7 +97,6 @@ export default {
                             swal("Employee has been deleted!", {
                                 icon: "success",
                             });
-                            this.getEmployees();
                         })
                         .catch(error => {
                             swal("Something went wrong!", {
