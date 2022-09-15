@@ -10,11 +10,43 @@
             </div>
             <div class="card-body">
                 <div class="card w-100" style="width: 18rem;">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                    </ul>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(employee, index) in employees" :key="employee.id" v-if="isLoaded">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.department }}</td>
+                            <td>{{ employee.section }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td class="d-flex gap-2">
+                                <button type="button" class="btn btn-warning text-white"
+                                        @click="editEmployee(employee)">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button type="button" class="btn btn-dark text-white" @click="viewEmployee(employee)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger text-white"
+                                        @click="deleteEmployee(employee)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="d-flex justify-content-center align-items-center" v-else>
+                            <div class="spinner-border text-primary" role="status"></div>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -27,6 +59,7 @@ export default {
     data() {
         return {
             employees: [],
+            isLoaded: false,
         };
     },
     methods: {
@@ -34,10 +67,23 @@ export default {
             window.location.href = "/add-employee";
         },
         getEmployees() {
-            alert("get employees");
+            axios.get('api/employees')
+                .then(res => {
+                    this.employees = res.data.employees;
+                    this.isLoaded = true;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        editEmployee(employee) {
+        },
+        viewEmployee(employee) {
+        },
+        deleteEmployee(employee) {
         },
     },
-    created() {
+    mounted() {
         this.getEmployees();
     },
 }

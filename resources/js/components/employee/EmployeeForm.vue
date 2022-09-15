@@ -70,7 +70,7 @@ export default {
             formData.append('section', this.form.section);
             formData.append('email', this.form.email);
 
-            axios.post('api/employees', formData, config)
+            axios.post('api/employees/add', formData, config)
                 .then(response => {
                     console.log(response);
                 })

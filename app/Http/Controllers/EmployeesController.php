@@ -29,16 +29,18 @@ class EmployeesController extends Controller
         return redirect('/');
     }
 
-    public function getEmployess()
+    public function index()
     {
         $employess = Employee::all();
 
-        return response()->json(
-            [
-                'status' => 'success',
-                'data' => $employess
-            ],
-            200
+        return response()->json([
+            'status' => 'success',
+            'employees' => $employess
+        ], 200
         );
     }
+
+    public function view(){}
+    public function update(){}
+    public function delete(){}
 }
