@@ -31,8 +31,14 @@ export default {
     },
     methods: {
         addEmployee() {
-            alert("add employee");
+            window.location.href = "/add-employee";
         },
+        getEmployees() {
+            alert("get employees");
+        },
+    },
+    created() {
+        this.getEmployees();
     },
 }
 </script>

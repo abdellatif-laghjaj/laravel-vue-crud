@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card">
-            <div class="card-header flex align-items-center">
+            <div class="card-header d-flex align-items-center">
                 <a href="/" class="btn btn-dark btn-sm float-right">
                     <i class="bi bi-arrow-left"></i>
                 </a>
@@ -29,7 +29,7 @@
                         <input type="email" class="form-control" id="email" v-model="form.email"
                                placeholder="Enter employee email" required>
                     </div>
-                    <button type="submit" class="btn btn-warning text-white my-2 w-100" @click="saveForm()">save
+                    <button type="button" class="btn btn-warning text-white my-2 w-100" @click="saveForm()">save
                     </button>
                 </form>
             </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: 'employee-form',
     props: {
@@ -56,7 +58,25 @@ export default {
     },
     methods: {
         saveForm() {
-            alert('save form')
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                }
+            }
+            let formData = new FormData();
+            formData.append('name', this.form.name);
+            formData.append('department', this.form.department);
+            formData.append('section', this.form.section);
+            formData.append('email', this.form.email);
+
+            axios.post('api/employees', formData, config)
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     },
     mounted() {
