@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmployeesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,8 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('example');
 });
+
+Route::get('/add-employee', [EmployeesController::class, 'create']);
 
 Auth::routes();
 
