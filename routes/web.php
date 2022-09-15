@@ -24,6 +24,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/add-employee', [EmployeesController::class, 'create']);
+Route::get('/view-employee/{id}', [EmployeesController::class, 'view']);
 
 Auth::routes();
 

@@ -79,8 +79,10 @@ export default {
                 });
         },
         editEmployee(employee) {
+            window.location.href = `/edit-employee/${employee.id}`;
         },
         viewEmployee(employee) {
+            window.location.href = `/view-employee/${employee.id}`;
         },
         deleteEmployee(employee) {
             swal({

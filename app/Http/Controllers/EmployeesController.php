@@ -40,12 +40,25 @@ class EmployeesController extends Controller
         );
     }
 
-    public function view()
+    public function view($id)
     {
+        $employee = Employee::find($id);
+        $data = [
+            'employee' => $employee
+        ];
+        return view('employee.view')->with($data);
     }
 
-    public function update()
+    public function update(Request $request)
     {
+        $employee = Employee::find($request->id);
+
+        $employee->name = $request->name;
+        $employee->department = $request->department;
+        $employee->section = $request->section;
+        $employee->email = $request->email;
+
+        $employee->update();
     }
 
     public function delete($id)
