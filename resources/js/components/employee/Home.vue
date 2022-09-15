@@ -29,8 +29,7 @@
                             <td>{{ employee.section }}</td>
                             <td>{{ employee.email }}</td>
                             <td class="d-flex gap-2">
-                                <button type="button" class="btn btn-warning text-white"
-                                        @click="editEmployee(employee)">
+                                <button type="button" class="btn btn-warning text-white">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                                 <button type="button" class="btn btn-dark text-white" @click="viewEmployee(employee)">
@@ -52,16 +51,17 @@
         </div>
     </div>
 </template>
-
 <script>
 import swal from 'sweetalert';
 import axios from "axios";
+
 export default {
     name: "Home",
     data() {
         return {
             employees: [],
             isLoaded: false,
+            showModel: false,
         };
     },
     methods: {
@@ -79,7 +79,7 @@ export default {
                 });
         },
         editEmployee(employee) {
-            window.location.href = `/edit-employee/${employee.id}`;
+            alert(employee.name);
         },
         viewEmployee(employee) {
             window.location.href = `/view-employee/${employee.id}`;

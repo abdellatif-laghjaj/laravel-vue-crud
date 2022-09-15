@@ -51,14 +51,6 @@ class EmployeesController extends Controller
 
     public function update(Request $request)
     {
-        $employee = Employee::find($request->id);
-
-        $employee->name = $request->name;
-        $employee->department = $request->department;
-        $employee->section = $request->section;
-        $employee->email = $request->email;
-
-        $employee->update();
     }
 
     public function delete($id)
