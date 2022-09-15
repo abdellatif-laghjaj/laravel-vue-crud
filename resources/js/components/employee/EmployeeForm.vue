@@ -1,10 +1,11 @@
 <template>
     <div class="container">
         <div class="card">
-            <div class="card-header">
-                <a href="/" class="btn btn-dark btn-sm float-right">
+            <div class="card-header flex align-items-center">
+                <a href="/employees" class="btn btn-dark btn-sm float-right">
                     <i class="bi bi-arrow-left"></i>
                 </a>
+                <h3 class="ms-2 mb-0">{{ scope }} Form</h3>
             </div>
             <div class="card-body">
                 <form>
@@ -40,6 +41,9 @@
 <script>
 export default {
     name: 'employee-form',
+    props: {
+        scope: String,
+    },
     data() {
         return {
             form: {
@@ -52,7 +56,7 @@ export default {
     },
     methods: {
         saveForm() {
-            console.log(this.form);
+            alert('save form')
         }
     },
     mounted() {

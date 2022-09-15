@@ -8,7 +8,7 @@ class EmployeesController extends Controller
 {
     public function create(){
         $data = [
-            'scope' => 'create',
+            'scope' => 'Create',
         ];
         return view('employee.form')->with($data);
     }
