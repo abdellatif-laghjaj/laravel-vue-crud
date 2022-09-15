@@ -40,6 +40,7 @@
 
 <script>
 import axios from "axios";
+import swal from 'sweetalert';
 
 export default {
     name: 'employee-form',
@@ -57,6 +58,12 @@ export default {
         }
     },
     methods: {
+        clearForm() {
+            this.form.name = '';
+            this.form.department = '';
+            this.form.section = '';
+            this.form.email = '';
+        },
         saveForm() {
             const config = {
                 headers: {
@@ -72,11 +79,25 @@ export default {
 
             axios.post('api/employees/add', formData, config)
                 .then(response => {
-                    console.log(response);
+                    swal({
+                        title: "Success",
+                        text: "Employee added successfully",
+                        icon: "success",
+                        button: "Ok",
+                    }).then(() => {
+                        this.$router.push({name: 'home'})
+                    })
                 })
                 .catch(error => {
-                    console.log(error);
-                });
+                    swal({
+                        title: "Error",
+                        text: "Something went wrong",
+                        icon: "error",
+                        button: "Ok",
+                    })
+                })
+
+            this.clearForm();
         }
     },
     mounted() {

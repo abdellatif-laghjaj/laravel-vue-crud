@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
                 <div class="card w-100" style="width: 18rem;">
-                    <table class="table table-striped">
+                    <table class="table table-striped" v-if="isLoaded">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -22,7 +22,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(employee, index) in employees" :key="employee.id" v-if="isLoaded">
+                        <tr v-for="(employee, index) in employees" :key="employee.id">
                             <th scope="row">{{ index + 1 }}</th>
                             <td>{{ employee.name }}</td>
                             <td>{{ employee.department }}</td>
@@ -42,11 +42,11 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr class="d-flex justify-content-center align-items-center" v-else>
-                            <div class="spinner-border text-primary" role="status"></div>
-                        </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center m-3" v-else>
+                        <div class="spinner-border" role="status"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
+import axios from "axios";
 export default {
     name: "Home",
     data() {
@@ -81,6 +83,31 @@ export default {
         viewEmployee(employee) {
         },
         deleteEmployee(employee) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this employee!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    axios.delete('api/employees/delete/' + employee.id)
+                        .then(res => {
+                            this.getEmployees();
+                            swal("Employee has been deleted!", {
+                                icon: "success",
+                            });
+                            this.getEmployees();
+                        })
+                        .catch(error => {
+                            swal("Something went wrong!", {
+                                icon: "error",
+                            });
+                        });
+                } else {
+                    swal("Your employee is safe!");
+                }
+            });
         },
     },
     mounted() {

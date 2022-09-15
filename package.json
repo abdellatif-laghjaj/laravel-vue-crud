@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "bootstrap-icons": "^1.9.1",
-        "element-ui": "^2.15.10"
+        "element-ui": "^2.15.10",
+        "sweetalert": "^2.1.2"
     }
 }

@@ -40,7 +40,22 @@ class EmployeesController extends Controller
         );
     }
 
-    public function view(){}
-    public function update(){}
-    public function delete(){}
+    public function view()
+    {
+    }
+
+    public function update()
+    {
+    }
+
+    public function delete($id)
+    {
+        $employee = Employee::find($id);
+        $employee->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Employee deleted successfully'
+        ], 200);
+    }
 }
